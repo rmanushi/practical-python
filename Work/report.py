@@ -75,22 +75,24 @@ def make_report_data(portfolio, prices):
 
     return rows
 
+def print_report(report):
+    '''
+    Prints the report given in the form of a list as input.
+    ''' 
+    headers = ('Name','Shares','Price','Change')
+    print('%10s %10s %10s %10s' % headers)
+    print(('-'*10 + ' ')*len(headers))
+    for row in report:
+        print('%10s %10d %10.2f %10.2f' % row)
 
-portfolio = read_portfolio('\portfolio.csv')
-prices = read_prices('\prices.csv')
-report = make_report_data(portfolio,prices)
 
-###total = 0.0
-###for s in portfolio:
-###    total += s['shares'] * s['price']
-###print(total)
-#print(prices)
-#print(portfolio_cost('\portfolio.csv'))
-#headers = ('Name', 'Shares', 'Price', 'Change')
-#print('%10s %10s %10s %10s' % headers)
-#print(('-' * 10 + ' ') * len(headers))
-#for row in report:
-#    print('%10s %10d %10.2f %10.2f' % row)
+def portfolio_report(portfoliofile,pricefile):
+    '''
+    Uses prvious functions to output final report.
+    '''       
+    portfolio = read_portfolio(portfoliofile)
+    prices = read_prices(pricefile)
+    report = make_report_data(portfolio,prices)
+    print_report(report)
 
-print(portfolio_cost('\portfoliodate.csv'))
-            
+portfolio_report('\portfolio.csv','\prices.csv')
